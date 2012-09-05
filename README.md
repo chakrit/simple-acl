@@ -73,9 +73,9 @@ I will add more event-based functionality if there is demand.
 Writing a new store of your own choice is pretty easy, too.
 
     var MyStore = function() { }
-    MyStore.prototype.grant = function(grantee, resource, callback);
-    MyStore.prototype.assert = function(grantee, resource, callback);
-    MyStore.prototype.revoke = function(grantee, resource, callback);
+    MyStore.prototype.grant = function(grantee, resource, callback) { };
+    MyStore.prototype.assert = function(grantee, resource, callback) { };
+    MyStore.prototype.revoke = function(grantee, resource, callback) { };
 
     acl.use(new MyStore());
 
@@ -85,9 +85,11 @@ To verify if your store is working, check the `test/store.js` file.
 
 # TESTING
 
+Good if you are modifying simple-acl or writing your own custom store.
+
     npm install mocha -g && npm test
 
-Hey, if you're not already using mocha for your tests, you should!
+Hey, if you're not already using [mocha](http://visionmedia.github.com/mocha/) for your tests, you should!
 
 # MIDDLEWARE
 
