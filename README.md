@@ -1,4 +1,3 @@
-
 # SIMPLE-ACL
 
 Seriously, why do all these ACL modules have to be so darn complex? I just need a simple well-tested module to do ACL.
@@ -11,23 +10,27 @@ Seriously, why do all these ACL modules have to be so darn complex? I just need 
 
     npm install simple-acl --save
 
-The `--save` flag adds `simple-acl` to your `package.json` file.
+The `--save` flag adds `simple-acl` to your `package.json` file. Then:
+
+    var acl = require('acl');
+    
+And you're ready to go.
 
 # SETUP
 
-You do need to do any setup to start using simple-acl.
+You do not need to do any extra setup to start using simple-acl.
 
 However, for production uses, you might want to use the `RedisStore` instead of the default `MemoryStore`.
 
 Any of the following works:
 
-    acl.use(new acl.RedisStore()); // uses default redis host/port and 'sacl:' for prefix.
-    acl.use(new acl.RedisStore('acl:prefix')); // uses default redis host/port and `acl:prefix' for prefix.
+    acl.use(new acl.RedisStore());              // uses default redis host/port and 'sacl:' for prefix.
+    acl.use(new acl.RedisStore('acl:prefix'));  // uses default redis host/port and `acl:prefix' for prefix.
 
-    acl.use(new acl.RedisStore(redisClient)); // uses supplied redis client and 'sacl:' for prefix
-    acl.use(new acl.RedisStore(redisClient, 'acl:prefix')); // uses everything you gave.
+    acl.use(new acl.RedisStore(redisClient));   // uses supplied redis client and 'sacl:' for prefix
+    acl.use(new acl.RedisStore(redisClient, 'acl:prefix')); // uses everything you gave it.
 
-Don't forget to `npm install redis`, too. Since I don't want to force everyone to install `hiredis` if they're not gonna use it.
+Don't forget to `npm install redis`, too. Since I don't want to force everyone to install `redis` which also includes `hiredis` if they're not gonna use it.
 
 # API
 
@@ -53,7 +56,17 @@ Well... do I even need to explain this?
 
 Just use your role name as the resource name. Use `grant()` for assigning roles and `revoke()` for removing roles.
 
-# CUSTOM STORE
+### Events Logging?!?
+
+Yes, `require('acl')` is an `EventEmitter` with two events:
+
+    acl.on('grant', function(grantee, resource) { });
+    acl.on('revoke', function(grantee, resource) { });
+    
+It's pretty basic right now just to allows you to log grants and revokes as they happens.
+I will add more event-based functionality if there is demand.
+
+### CUSTOM STORE
 
 Writing a new store of your own choice is pretty easy, too.
 
