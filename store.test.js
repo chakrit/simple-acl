@@ -7,7 +7,8 @@
     , MemoryStore = acl.MemoryStore;
 
   // temp string
-  var G = 'grantee', R = 'resource';
+  var G = 'grantee', R = 'resource'
+    , funcs = 'grant,assert,revoke'.split(',');
 
   // tests
   describe('MemoryStore', function() {
@@ -15,6 +16,13 @@
       this.store = new MemoryStore();
       acl.use(this.store);
     });
+
+    for (var i in funcs) (function(func) {
+      it('should exports the ' + func + '() function', function() {
+        assert(func in this.store);
+        assert(typeof this.store[func] === 'function');
+      });
+    })(funcs[i]);
 
     describe('asserting right away', function() {
       before(function(done) { var me = this;
@@ -32,7 +40,7 @@
       before(function(done) { acl.grant(G, R, done); });
       after(function(done) { acl.revoke(G, R, done); });
 
-      it('should causes assert() to succeeds', function(done) {
+      it('should causes assert() to return true', function(done) {
         acl.assert(G, R, function(e, success) {
           done(e, assert(success === true));
         });
@@ -42,7 +50,7 @@
         before(function(done) { acl.revoke(G, R, done); });
         after(function(done) { acl.grant(G, R, done); });
 
-        it('should causes assert() to fails', function(done) {
+        it('should causes assert() to return false', function(done) {
           acl.assert(G, R, function(e, success) {
             done(e, assert(success === false));
           });
