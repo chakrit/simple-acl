@@ -8,9 +8,13 @@ module.exports = (function() {
   acl.RedisStore = require('./redis-store');
   acl.MockStore = require('./mock-store');
 
-  // bound wrapper
-  var bind = function(func, obj) {
-    return function() { func.apply(obj, arguments); };
+  // function shim
+  var shim = function(obj, funcName) {
+    var func = obj[funcName];
+
+    return function() {
+      func.apply(obj, arguments);
+    };
   };
 
   // store management.
@@ -18,9 +22,9 @@ module.exports = (function() {
   acl.use = function(store) {
     acl.store = store;
 
-    acl.grant = bind(store.grant, store);
-    acl.assert = bind(store.assert, store);
-    acl.revoke = bind(store.revoke, store);
+    acl.grant = shim(store, 'grant');
+    acl.assert = shim(store, 'assert');
+    acl.revoke = shim(store, 'revoke');
   };
 
   // dud function (replaced by .use)
