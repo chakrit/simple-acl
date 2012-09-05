@@ -37,6 +37,17 @@
           done(e, assert(success === true));
         });
       });
+
+      describe('and then revoking it', function() {
+        before(function(done) { acl.revoke(G, R, done); });
+        after(function(done) { acl.grant(G, R, done); });
+
+        it('should causes assert() to fails', function(done) {
+          acl.assert(G, R, function(e, success) {
+            done(e, assert(success === false));
+          });
+        });
+      });
     });
   });
 

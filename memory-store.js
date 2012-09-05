@@ -23,12 +23,22 @@ module.exports = (function() {
         var list = this.rights[grantee]
           , ok = (list && list.indexOf(resource) != -1);
 
-        defer(function() { callback(null, ok); });
+        defer(function() { callback(null, !!ok); });
       }
 
     , 'revoke':
       function(grantee, resource, callback) {
-        defer(callback);
+        if (!(grantee in this.rights))
+          return defer(callback);
+
+        var list = this.rights[grantee]
+          , index = list.indexOf(resource);
+
+        if (index !== -1) {
+          list.splice(index, 1);
+        }
+
+        defer(callback); // always succeeds
       }
     };
 
