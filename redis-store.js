@@ -3,12 +3,15 @@
 module.exports = (function() {
 
   var RedisStore = function(client, prefix) {
-    if (!client) { // auto-connect to default host/port
-      client = require('redis').createClient();
+    // overloads
+    if (typeof client === 'string') {
+      prefix = client;
+      client = undefined;
     }
-    if (!prefix) {
-      prefix = 'sacl:';
-    }
+
+    // defaults
+    if (!client) client = require('redis').createClient();
+    if (!prefix) prefix = 'sacl:';
 
     this.client = client;
     this.prefix = prefix;
