@@ -34,9 +34,8 @@ module.exports = (function() {
         var list = this.rights[grantee]
           , index = list.indexOf(resource);
 
-        if (index !== -1) {
+        if (index !== -1)
           list.splice(index, 1);
-        }
 
         defer(callback); // always succeeds
       }
