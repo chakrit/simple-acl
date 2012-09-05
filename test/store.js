@@ -1,9 +1,9 @@
 
-// store.test.js - Tests for the the stores.
+// store.js - Tests for the the stores.
 (function() {
 
   var assert = require('assert')
-    , acl = require('./');
+    , acl = require('..');
 
   // temp string
   var G = 'grantee', R = 'resource'
@@ -17,8 +17,15 @@
     // tests
     describe(storeName, function() {
       before(function() {
+        this.oldStore = acl.store;
         this.store = new Store();
         acl.use(this.store);
+      });
+
+      after(function() {
+        acl.use(this.oldStore);
+        delete this['oldStore'];
+        delete this['store'];
       });
 
       for (var i in funcs) (function(func) {

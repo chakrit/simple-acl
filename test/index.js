@@ -1,5 +1,5 @@
 
-// test.js - Test the simple-acl package
+// index.js - Test main simple-acl export
 (function() {
 
   var assert = require('assert');
