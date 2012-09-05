@@ -1,11 +1,11 @@
 
 # SIMPLE-ACL
 
-Because ACL needn't be overtly complex.
+Seriously, why do all these ACL modules have to be so darn complex? I just need a simple well-tested module to do ACL.
 
-* Simple concept of `grant` and `revoke`
-* Simple to install.
+* Simple concept of `grant`, `assert` and `revoke`. See the API.
 * Simple to setup.
+* Simple to extend.
 
 # INSTALL
 
@@ -27,6 +27,7 @@ Any of the following works:
     acl.use(new acl.RedisStore(redisClient)); // uses supplied redis client and 'sacl:' for prefix
     acl.use(new acl.RedisStore(redisClient, 'acl:prefix')); // uses everything you gave.
 
+Don't forget to `npm install redis`, too. Since I don't want to force everyone to install `hiredis` if they're not gonna use it.
 
 # API
 
@@ -42,6 +43,16 @@ Asserts that `grantee` has access to `resource` and calls `callback(e, true)` if
 
 Revokes `grantee` 's access to `resource` and invoke `callback(e)` when done.
 
+# WHAT ABOUT...
+
+### RESOURCE-BASED ASSERTS
+
+Well... do I even need to explain this?
+
+### ROLE-BASED ASSERTS
+
+Just use your role name as the resource name. Use `grant()` for assigning roles and `revoke()` for removing roles.
+
 # CUSTOM STORE
 
 Writing a new store of your own choice is pretty easy, too.
@@ -54,6 +65,14 @@ Writing a new store of your own choice is pretty easy, too.
     acl.use(new MyStore());
 
 Pretty simple, huh?
+
+To verify if your store is working, check the `test/store.js` file.
+
+# TESTING
+
+    npm install mocha -g && npm test
+
+Hey, if you're not already using mocha for your tests, you should!
 
 # MIDDLEWARE
 
@@ -77,4 +96,6 @@ BSD
 # SUPPORT
 
 Just open a new Github issue or ping me [@chakrit](http://twitter.com/chakrit) on Twitter.
+
+If you see me hanging around the IRC, just ping me :)
 
