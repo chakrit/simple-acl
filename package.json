@@ -1,0 +1,24 @@
+{
+  "name": "simple-acl",
+  "version": "0.1.0",
+  "description": "Simple ACL. 'nuff said.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chakrit/simple-acl.git"
+  },
+  "optionalDependencies": {
+    "redis": "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "keywords": [
+    "acl"
+  ],
+  "author": "Chakrit Wichian (http://chakrit.net) <service@chakrit.net>",
+  "license": "BSD"
+}
