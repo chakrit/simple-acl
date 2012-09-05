@@ -114,5 +114,5 @@ BSD
 
 Just open a new Github issue or ping me [@chakrit](http://twitter.com/chakrit) on Twitter.
 
-If you see me hanging around the IRC, just ping me :)
+If you see me hanging around #node.js IRC channel, that works too, just say hi :)
 
