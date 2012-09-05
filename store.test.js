@@ -1,62 +1,68 @@
 
-// memory-store.test.js - Tests for the MemoryStore
+// store.test.js - Tests for the the stores.
 (function() {
 
   var assert = require('assert')
-    , acl = require('./')
-    , MemoryStore = acl.MemoryStore;
+    , acl = require('./');
 
   // temp string
   var G = 'grantee', R = 'resource'
     , funcs = 'grant,assert,revoke'.split(',');
 
-  // tests
-  describe('MemoryStore', function() {
-    before(function() {
-      this.store = new MemoryStore();
-      acl.use(this.store);
-    });
+  var stores = ['MemoryStore', 'RedisStore'];
 
-    for (var i in funcs) (function(func) {
-      it('should exports the ' + func + '() function', function() {
-        assert(func in this.store);
-        assert(typeof this.store[func] === 'function');
+  for (var i in stores) (function(storeName) {
+    var Store = acl[storeName];
+
+    // tests
+    describe(storeName, function() {
+      before(function() {
+        this.store = new Store();
+        acl.use(this.store);
       });
-    })(funcs[i]);
 
-    describe('asserting right away', function() {
-      before(function(done) { var me = this;
-        acl.assert(G, R, function(e, success) {
-          done(e, me.success = success);
+      for (var i in funcs) (function(func) {
+        it('should exports the ' + func + '() function', function() {
+          assert(func in this.store);
+          assert(typeof this.store[func] === 'function');
         });
-      });
+      })(funcs[i]);
 
-      it('should returns false', function() {
-        assert(this.success === false);
-      });
-    });
-
-    describe('granting permission', function() {
-      before(function(done) { acl.grant(G, R, done); });
-      after(function(done) { acl.revoke(G, R, done); });
-
-      it('should causes assert() to return true', function(done) {
-        acl.assert(G, R, function(e, success) {
-          done(e, assert(success === true));
-        });
-      });
-
-      describe('and then revoking it', function() {
-        before(function(done) { acl.revoke(G, R, done); });
-        after(function(done) { acl.grant(G, R, done); });
-
-        it('should causes assert() to return false', function(done) {
+      describe('asserting right away', function() {
+        before(function(done) { var me = this;
           acl.assert(G, R, function(e, success) {
-            done(e, assert(success === false));
+            done(e, me.success = success);
+          });
+        });
+
+        it('should returns false', function() {
+          assert(this.success === false);
+        });
+      });
+
+      describe('granting permission', function() {
+        before(function(done) { acl.grant(G, R, done); });
+        after(function(done) { acl.revoke(G, R, done); });
+
+        it('should causes assert() to return true', function(done) {
+          acl.assert(G, R, function(e, success) {
+            done(e, assert(success === true));
+          });
+        });
+
+        describe('and then revoking it', function() {
+          before(function(done) { acl.revoke(G, R, done); });
+          after(function(done) { acl.grant(G, R, done); });
+
+          it('should causes assert() to return false', function(done) {
+            acl.assert(G, R, function(e, success) {
+              done(e, assert(success === false));
+            });
           });
         });
       });
     });
-  });
+
+  })(stores[i]);
 
 })();
