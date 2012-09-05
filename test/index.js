@@ -2,7 +2,8 @@
 // index.js - Test main simple-acl export
 (function() {
 
-  var assert = require('assert');
+  var assert = require('assert')
+    , EventEmitter = require('events').EventEmitter;
 
   // interface info
   var stores = 'MemoryStore,RedisStore,MockStore'.split(',')
@@ -10,7 +11,11 @@
 
   // tests
   describe('acl', function() {
-    before(function() { this.acl = require('./'); });
+    before(function() { this.acl = require('..'); });
+
+    it('should be an instance of EventEmitter', function() {
+      assert(this.acl instanceof EventEmitter);
+    });
 
     for (var i in stores) (function(store) {
       it('should exports the ' + store, function() {

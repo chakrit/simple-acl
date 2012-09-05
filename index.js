@@ -2,18 +2,20 @@
 // index.js - Main interface file
 module.exports = (function() {
 
-  var acl = { };
+  var EventEmitter = require('events').EventEmitter
+    , acl = new EventEmitter();
 
   acl.MemoryStore = require('./memory-store');
   acl.RedisStore = require('./redis-store');
   acl.MockStore = require('./mock-store');
 
   // function shim
-  var shim = function(obj, funcName) {
-    var func = obj[funcName];
+  var shim = function(obj, action) {
+    var func = obj[action];
 
-    return function() {
-      func.apply(obj, arguments);
+    return function(grantee, resource, callback) {
+      acl.emit(action, grantee, resource);
+      func.call(obj, grantee, resource, callback);
     };
   };
 
