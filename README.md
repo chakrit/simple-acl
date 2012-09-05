@@ -34,6 +34,8 @@ Don't forget to `npm install redis`, too. Since I don't want to force everyone t
 
 # API
 
+All arguments to the api are expected to be strings (except for the callback, of course.)
+
 ### acl.grant(grantee, resource, callback)
 
 Grants `grantee` acesss to `resource` and invoke `callback(e)` when done.
@@ -48,11 +50,11 @@ Revokes `grantee` 's access to `resource` and invoke `callback(e)` when done.
 
 # WHAT ABOUT...
 
-### RESOURCE-BASED ASSERTS
+### Resource-based asserts
 
 Well... do I even need to explain this?
 
-### ROLE-BASED ASSERTS
+### Role-based asserts
 
 Just use your role name as the resource name. Use `grant()` for assigning roles and `revoke()` for removing roles.
 
@@ -66,7 +68,7 @@ Yes, `require('acl')` is an `EventEmitter` with two events:
 It's pretty basic right now just to allows you to log grants and revokes as they happens.
 I will add more event-based functionality if there is demand.
 
-### CUSTOM STORE
+### Custom Stores
 
 Writing a new store of your own choice is pretty easy, too.
 
