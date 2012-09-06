@@ -5,6 +5,7 @@ Seriously, why do all these ACL modules have to be so darn complex? I just need 
 * Simple concept of `grant`, `assert` and `revoke`. See the API.
 * Simple to setup.
 * Simple to extend.
+* [![Build Status](https://secure.travis-ci.org/chakrit/simple-acl.png)](http://travis-ci.org/chakrit/simple-acl)
 
 # INSTALL
 
