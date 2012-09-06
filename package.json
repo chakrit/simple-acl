@@ -4,7 +4,7 @@
   "description": "Simple ACL. 'nuff said.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter nyan"
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
