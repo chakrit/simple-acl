@@ -11,10 +11,10 @@
     "url": "git://github.com/chakrit/simple-acl.git"
   },
   "optionalDependencies": {
-    "redis": "latest"
+    "redis": "~0.8.2"
   },
   "devDependencies": {
-    "mocha": "latest"
+    "mocha": "~1.6.0"
   },
   "keywords": [
     "acl"
