@@ -7,16 +7,18 @@ Seriously, why do all these ACL modules have to be so darn complex? I just need 
 * Simple to extend.
 * [![Build Status](https://secure.travis-ci.org/chakrit/simple-acl.png)](http://travis-ci.org/chakrit/simple-acl)
 
+---
 # INSTALL
 
     npm install simple-acl --save
 
 The `--save` flag adds `simple-acl` to your `package.json` file. Then:
 
-    var acl = require('acl');
+    var acl = require('simple-acl');
     
 And you're ready to go.
 
+---
 # SETUP
 
 You do not need to do any extra setup to start using simple-acl.
@@ -33,6 +35,7 @@ Any of the following works:
 
 Don't forget to `npm install redis`, too. Since I don't want to force everyone to install `redis` which also includes `hiredis` if they're not gonna use it.
 
+---
 # API
 
 All arguments to the api are expected to be strings (except for the callback, of course.)
@@ -49,6 +52,7 @@ Asserts that `grantee` has access to `resource` and calls `callback(e, true)` if
 
 Revokes `grantee` 's access to `resource` and invoke `callback(e)` when done.
 
+---
 # WHAT ABOUT...
 
 ### Resource-based asserts
@@ -84,6 +88,7 @@ Pretty simple, huh?
 
 To verify if your store is working, check the `test/store.js` file.
 
+---
 # TESTING
 
 Good if you are modifying simple-acl or writing your own custom store.
@@ -92,6 +97,7 @@ Good if you are modifying simple-acl or writing your own custom store.
 
 Hey, if you're not already using [mocha](http://visionmedia.github.com/mocha/) for your tests, you should!
 
+---
 # MIDDLEWARE
 
 To use simple-acl as a connect/express middleware is pretty simple still, just add the following code to your initialization script:
@@ -107,10 +113,12 @@ To use simple-acl as a connect/express middleware is pretty simple still, just a
 
 Where `req.user` is your user object if you are using `passport` for authentication and `resourceful` for the model, for example.
 
+---
 # LICENSE
 
 BSD
 
+---
 # SUPPORT
 
 Just open a new Github issue or ping me [@chakrit](http://twitter.com/chakrit) on Twitter.
