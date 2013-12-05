@@ -42,7 +42,7 @@ All arguments to the api are expected to be strings (except for the callback, of
 
 ### acl.grant(grantee, resource, callback)
 
-Grants `grantee` acesss to `resource` and invoke `callback(e)` when done.
+Grants `grantee` access to `resource` and invoke `callback(e)` when done.
 
 ### acl.assert(grantee, resource, callback)
 
