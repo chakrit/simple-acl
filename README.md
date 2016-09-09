@@ -15,7 +15,7 @@ Seriously, why do all these ACL modules have to be so darn complex? I just need 
 The `--save` flag adds `simple-acl` to your `package.json` file. Then:
 
     var acl = require('simple-acl');
-    
+
 And you're ready to go.
 
 ---
@@ -34,6 +34,21 @@ Any of the following works:
     acl.use(new acl.RedisStore(redisClient, 'acl:prefix')); // uses everything you gave it.
 
 Don't forget to `npm install redis`, too. Since I don't want to force everyone to install `redis` which also includes `hiredis` if they're not gonna use it.
+
+# SQL Database Stores
+
+Using SQL database is possible via [Bookshelf.js](http://bookshelfjs.org/).
+Currently, this package has been tested with MySQL, PostgreSQL, and SQLite.
+
+    npm install bookshelf knex mysql // MySQL
+    npm install bookshelf knex pg // PostgreSQL
+    npm install bookshelf knex sqlite3 // SQLite
+
+Configure your database connections in `knexfile.js`.
+
+A simple schema is provided in the `migrations` directory. To create the tables:
+
+    npm run migrate:mysql | migrate:sqlite | migrate:pg
 
 ---
 # API
@@ -69,7 +84,7 @@ Yes, `require('acl')` is an `EventEmitter` with two events:
 
     acl.on('grant', function(grantee, resource) { });
     acl.on('revoke', function(grantee, resource) { });
-    
+
 It's pretty basic right now just to allows you to log grants and revokes as they happens.
 I will add more event-based functionality if there is demand.
 

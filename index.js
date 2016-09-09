@@ -9,6 +9,12 @@ module.exports = (function() {
   acl.RedisStore = require('./redis-store');
   acl.MockStore = require('./mock-store');
 
+  try {
+    require.resolve('bookshelf');
+    acl.BookshelfStore = require('./bookshelf-store');
+  } catch (e) {
+  }
+
   // function shim
   var shim = function(obj, action) {
     var func = obj[action];

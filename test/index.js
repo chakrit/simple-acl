@@ -9,6 +9,12 @@
   var stores = 'MemoryStore,RedisStore,MockStore'.split(',')
     , funcs = 'grant,revoke,assert'.split(',');
 
+  try {
+    require.resolve('bookshelf');
+    stores.push('BookshelfStore');
+  } catch (e) {
+  }
+
   // tests
   describe('acl', function() {
     before(function() { this.acl = require('..'); });
