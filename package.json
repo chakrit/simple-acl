@@ -4,6 +4,14 @@
   "description": "Simple ACL. 'nuff said.",
   "main": "index.js",
   "scripts": {
+    "migrate:mysql": "./node_modules/.bin/knex migrate:latest --env dev_mysql",
+    "migrate:sqlite": "./node_modules/.bin/knex migrate:latest --env dev_sqlite3",
+    "migrate:pg": "./node_modules/.bin/knex migrate:latest --env dev_pg",
+    "rollback:mysql": "./node_modules/.bin/knex migrate:rollback --env dev_mysql",
+    "rollback:sqlite": "./node_modules/.bin/knex migrate:rollback --env dev_sqlite3",
+    "rollback:pg": "./node_modules/.bin/knex migrate:rollback --env dev_pg",
+    "migrate:all": "npm run migrate:mysql; npm run migrate:sqlite; npm run migrate:pg",
+    "rollback:all": "npm run rollback:mysql; npm run rollback:sqlite; npm run rollback:pg",
     "test": "mocha --reporter spec"
   },
   "repository": {
@@ -13,6 +21,12 @@
   "optionalDependencies": {
     "redis": "~0.8.2"
   },
+  "peerDependencies": {
+    "bookshelf": "^0.10.*",
+    "knex": "^0.11.*",
+    "mysql": "^2.11.*",
+    "sqlite3": "^3.1.*"
+  },
   "devDependencies": {
     "mocha": "~1.6.0"
   },
@@ -20,5 +34,8 @@
     "acl"
   ],
   "author": "Chakrit Wichian (http://chakrit.net) <service@chakrit.net>",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "async": "^2.0.1"
+  }
 }
