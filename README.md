@@ -95,7 +95,7 @@ Good if you are modifying simple-acl or writing your own custom store.
 
     npm install mocha -g && npm test
 
-Hey, if you're not already using [mocha](http://visionmedia.github.com/mocha/) for your tests, you should!
+Hey, if you're not already using [mocha](http://mochajs.org/) for your tests, you should!
 
 ---
 # MIDDLEWARE
